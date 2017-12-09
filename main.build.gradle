@@ -1,0 +1,42 @@
+主程序的buile.gradle
+==================
+
+```
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.1.3'
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+
+def aarHomeUrl ='file://' + new File(System.getProperty('user.home'), '.m2/repository').absolutePath
+
+allprojects {
+    repositories {
+        jcenter()
+
+        maven {
+            url "$aarHomeUrl"
+            //url "http://maven.bunny-tech.com:8081/repository/maven-releases/"
+        }
+
+    }
+    //让报错变得详细
+    gradle.projectsEvaluated {
+        tasks.withType(JavaCompile) {
+            options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+        }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
