@@ -12,6 +12,7 @@ Android {
             abiFilters "armeabi", "armeabi-v7a","arm64-v8a","x86_64", "x86" //cpu的类型
         }
 	}
+    
 	//指定要链入的so路径
 	sourceSets {
         main {
